@@ -1,7 +1,7 @@
 # @livelybone/rem-init
 [![NPM Version](http://img.shields.io/npm/v/@livelybone/rem-init.svg?style=flat-square)](https://www.npmjs.com/package/@livelybone/rem-init)
 [![Download Month](http://img.shields.io/npm/dm/@livelybone/rem-init.svg?style=flat-square)](https://www.npmjs.com/package/@livelybone/rem-init)
-![gzip with dependencies: kb](https://img.shields.io/badge/gzip--with--dependencies-kb-brightgreen.svg "gzip with dependencies: kb")
+![gzip with dependencies: .6kb](https://img.shields.io/badge/gzip--with--dependencies-.6kb-brightgreen.svg "gzip with dependencies: .6kb")
 ![pkg.module](https://img.shields.io/badge/pkg.module-supported-blue.svg "pkg.module")
 
 > `pkg.module supported`, which means that you can apply tree-shaking in you project
@@ -63,3 +63,7 @@ RemInit({scalable: true, maxFactor: 4}) // => viewport: width=device-width, init
 
 RemInit({maxFactor: 4}) // => viewport: width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5, user-scalable=no
 ```
+
+## Extra
+
+> The function will add `isMobile` field to `window` if `isMobile` is not exist in `window`
