@@ -7,7 +7,7 @@
   <script>
   RemInit({
     scalable: true,
-    pageScaleInitMiddleware: function (fontScale, isMobile) {
+    pageScaleMiddleware: function (fontScale, isMobile) {
       return isMobile ? 1 / fontScale / fontScale / (1200 / fontScale / window.screen.availWidth) : 1 / fontScale
     },
     pageScaleMaxFactor: 4,

@@ -18,7 +18,7 @@ function cContent(initialScale, options) {
 }
 
 /**
- * @param {Object<{ pageNoScale: Boolean, pageScalable: Boolean, pageScaleInitMiddleware: Function, pageScaleMaxFactor: Number|Boolean }>} options
+ * @param {Object<{ pageNoScale: Boolean, pageScalable: Boolean, pageScaleMiddleware: Function, pageScaleMaxFactor: Number|Boolean }>} options
  * @desc set viewport, and font-size of html tag, in order to adapting the interfaces in various device by using `rem`
  * */
 export default function RemInit(options) {
@@ -58,7 +58,7 @@ export default function RemInit(options) {
 
   /* Set viewport */
   var content
-  var middleware = options.pageScaleInitMiddleware
+  var middleware = options.pageScaleMiddleware
   if (!middleware) content = cContent(1 / fontScale, options)
   else content = cContent(middleware(fontScale, isMobile), options)
   var meta = document.createElement('meta')
