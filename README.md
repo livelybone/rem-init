@@ -53,7 +53,7 @@ Use in html, see what your can use in [CDN: unpkg](https://unpkg.com/@livelybone
 
 > `pageScalable`: When it is equal to `true`, the tool will remove the `user-scalable` field of viewport, which means that you can scale your pages on the range depends on `minimum-scale` and `maximum-scale`
 
-> `pageScaleMiddleware`: `(fontScale: Number, isMobile: Boolean) => pageScale` You can rewrite the pageScale value which is default to be `1 / fontScale` on your own will by this function
+> `pageScaleMiddleware`: `(fontScale: Number, isMobile: Boolean) => pageScale` You can rewrite the pageScale value which is default to be `1 / fontScale` on your own will by this function. It only works when `pageNoScale` is not equal to `true`
 
 > `pageScaleMaxFactor`: It only works when `scalable` is equal to `true`. When it is equal to `true`, the tool will remove the `maximum-scale` field of viewport, otherwise, the function will set the `maximum-scale` value to `Math.max(1, options.pageScaleMaxFactor || 0) * initialScale`
 
@@ -75,6 +75,10 @@ RemInit({pageScalable: true, pageScaleMaxFactor: 0.5}) // => viewport: width=dev
 RemInit({pageScalable: true, pageScaleMaxFactor: 4}) // => viewport: width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=2
 
 RemInit({pageScaleMaxFactor: 4}) // => viewport: width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5, user-scalable=no
+
+RemInit({pageScaleMiddleware: (fontScale, isMobile) => (isMobile ? 1 / fontScale / fontScale : 1)}) // => viewport: width=device-width, initial-scale=0.25, minimum-scale=0.25, maximum-scale=0.25
+
+RemInit({pageScalable: true, pageScaleMiddleware: (fontScale, isMobile) => (isMobile ? 1 / fontScale / fontScale : 1), pageScaleMaxFactor: 4}) // => viewport: width=device-width, initial-scale=0.25, minimum-scale=0.25, maximum-scale=1
 ```
 
 ## Extra

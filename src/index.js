@@ -59,7 +59,7 @@ export default function RemInit(options) {
   /* Set viewport */
   var content
   var middleware = options.pageScaleMiddleware
-  if (!middleware) content = cContent(1 / fontScale, options)
+  if (pageNoScale || !middleware) content = cContent(1 / fontScale, options)
   else content = cContent(middleware(fontScale, isMobile), options)
   var meta = document.createElement('meta')
   meta.setAttribute('name', 'viewport')

@@ -5,13 +5,7 @@
   <title>RemInit</title>
   <script src="../lib/umd/index.js"></script>
   <script>
-  RemInit({
-    scalable: true,
-    pageScaleMiddleware: function (fontScale, isMobile) {
-      return isMobile ? 1 / fontScale / fontScale / (1200 / fontScale / window.screen.availWidth) : 1 / fontScale
-    },
-    pageScaleMaxFactor: 4,
-  })
+  RemInit({pageScalable: true, pageScaleMiddleware: (fontScale, isMobile) => (isMobile ? 1 / fontScale / fontScale : 1), pageScaleMaxFactor: 4})
   </script>
   <style>
   #module {
