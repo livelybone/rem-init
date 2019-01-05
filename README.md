@@ -45,15 +45,17 @@ Use in html, see what your can use in [CDN: unpkg](https://unpkg.com/@livelybone
 ```
 
 ## Params
-| Name              | Type                                                                                   | DefaultValue                                                        | Description  |
-| ----------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------ |
-| `options`         | `Object<{ forceToInitScale: Boolean, scalable: Boolean, maxFactor: Number|Boolean }>`  | `{forceToInitScale: false, scalable: false, maxFactor: false}`      |  |
+| Name              | Type                                                                                                                              | DefaultValue                                                                                                 | Description  |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------ |
+| `options`         | `Object<{ pageNoScale: Boolean, pageScalable: Boolean, pageScaleInitMiddleware: Function, pageScaleMaxFactor: Number|Boolean }>`  | `{ pageNoScale: false, pageScalable: false, pageScaleInitMiddleware: null, pageScaleMaxFactor: false }`      |  |
 
-> `forceToInitScale`: When it is equal to `true`, the function will force to set the `initial-scale` value of viewport to 1
+> `pageNoScale`: When it is equal to `true`, the tool will force to set the `initial-scale` value of viewport to 1
 
-> `scalable`: When it is equal to `true`, the function will remove the `user-scalable` field of viewport, which means that you can scale your pages on the range depends on `minimum-scale` and `maximum-scale`
+> `pageScalable`: When it is equal to `true`, the tool will remove the `user-scalable` field of viewport, which means that you can scale your pages on the range depends on `minimum-scale` and `maximum-scale`
 
-> `maxFactor`: It only works when `scalable` is equal to `true`. When it is equal to `true`, the function will remove the `maximum-scale` field of viewport, otherwise, the function will set the `maximum-scale` value to `Math.max(1, options.maxFactor || 0) * initialScale`
+> `pageScaleInitMiddleware`: `(fontScale: Number, isMobile: Boolean) => pageScale` You can rewrite the pageScale value which is default to be `1 / fontScale` on your own will by this function
+
+> `pageScaleMaxFactor`: It only works when `scalable` is equal to `true`. When it is equal to `true`, the tool will remove the `maximum-scale` field of viewport, otherwise, the function will set the `maximum-scale` value to `Math.max(1, options.pageScaleMaxFactor || 0) * initialScale`
 
 ### Example
 ```js
@@ -62,17 +64,17 @@ window.devicePixelRatio = 2
 window.isMobile = true
 
 // results
-RemInit({forceToInitScale: true}) // => viewport: width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no
+RemInit({pageNoScale: true}) // => viewport: width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no
 
-RemInit({scalable: true, maxFactor: true}) // => viewport: width=device-width, initial-scale=0.5, minimum-scale=0.5
+RemInit({pageScalable: true, pageScaleMaxFactor: true}) // => viewport: width=device-width, initial-scale=0.5, minimum-scale=0.5
 
-RemInit({scalable: true, maxFactor: 1}) // => viewport: width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5
+RemInit({pageScalable: true, pageScaleMaxFactor: 1}) // => viewport: width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5
 
-RemInit({scalable: true, maxFactor: 0.5}) // => viewport: width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5
+RemInit({pageScalable: true, pageScaleMaxFactor: 0.5}) // => viewport: width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5
 
-RemInit({scalable: true, maxFactor: 4}) // => viewport: width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=2
+RemInit({pageScalable: true, pageScaleMaxFactor: 4}) // => viewport: width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=2
 
-RemInit({maxFactor: 4}) // => viewport: width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5, user-scalable=no
+RemInit({pageScaleMaxFactor: 4}) // => viewport: width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5, user-scalable=no
 ```
 
 ## Extra

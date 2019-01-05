@@ -5,7 +5,13 @@
   <title>RemInit</title>
   <script src="../lib/umd/index.js"></script>
   <script>
-  RemInit({ maxFactor: 4})
+  RemInit({
+    scalable: true,
+    pageScaleInitMiddleware: function (fontScale, isMobile) {
+      return isMobile ? 1 / fontScale / fontScale / (1200 / fontScale / window.screen.availWidth) : 1 / fontScale
+    },
+    pageScaleMaxFactor: 4,
+  })
   </script>
   <style>
   #module {

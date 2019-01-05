@@ -2,23 +2,23 @@ var initStyle = '*{max-height: 1000000rem} body{-webkit-font-smoothing: antialia
 
 /**
  * @param {Number} initialScale
- * @param {Object<{ scalable: Boolean, maxFactor: Number|Boolean }>} options
+ * @param {Object<{ pageScalable: Boolean, pageScaleMaxFactor: Number|Boolean }>} options
  * */
 function cContent(initialScale, options) {
   var s = 'width=device-width, initial-scale=' + initialScale
     + ', minimum-scale=' + initialScale
-  if (!options.scalable) {
+  if (!options.pageScalable) {
     return s + ', maximum-scale=' + initialScale + ', user-scalable=no'
   }
 
-  if (options.maxFactor === true) return s
+  if (options.pageScaleMaxFactor === true) return s
 
-  var max = Math.max(options.maxFactor || 0, 1)
+  var max = Math.max(options.pageScaleMaxFactor || 0, 1)
   return s + ', maximum-scale=' + max * initialScale
 }
 
 /**
- * @param {Object<{ forceToInitScale: Boolean, scalable: Boolean, maxFactor: Number|Boolean }>} options
+ * @param {Object<{ pageNoScale: Boolean, pageScalable: Boolean, pageScaleInitMiddleware: Function, pageScaleMaxFactor: Number|Boolean }>} options
  * @desc set viewport, and font-size of html tag, in order to adapting the interfaces in various device by using `rem`
  * */
 export default function RemInit(options) {
@@ -31,9 +31,9 @@ export default function RemInit(options) {
     window.isMobile = isMobile
   }
 
-  /* forceToInitScale: whether force to set the initial-scale value of viewport to 1 */
-  var forceToInitScale = options.forceToInitScale
-  var fontScale = !isMobile || forceToInitScale ? 1 : window.devicePixelRatio || 1
+  /* pageNoScale: whether force to set the initial-scale value of viewport to 1 */
+  var pageNoScale = options.pageNoScale
+  var fontScale = !isMobile || pageNoScale ? 1 : window.devicePixelRatio || 1
 
   /* Set font-size of html tag */
   document.documentElement.style.fontSize = 625 * fontScale + '%'
@@ -57,8 +57,10 @@ export default function RemInit(options) {
   }
 
   /* Set viewport */
-  var initialScale = 1 / fontScale
-  var content = cContent(initialScale, options)
+  var content
+  var middleware = options.pageScaleInitMiddleware
+  if (!middleware) content = cContent(1 / fontScale, options)
+  else content = cContent(middleware(fontScale, isMobile), options)
   var meta = document.createElement('meta')
   meta.setAttribute('name', 'viewport')
   meta.setAttribute('content', content)
