@@ -1,3 +1,5 @@
+var initStyle = '*{max-height: 1000000rem} body{-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}'
+
 /**
  * @param {Number} initialScale
  * @param {Object<{ scalable: Boolean, maxFactor: Number|Boolean }>} options
@@ -35,14 +37,36 @@ export default function RemInit(options) {
 
   /* Set font-size of html tag */
   document.documentElement.style.fontSize = 625 * fontScale + '%'
-  window.rootFootSize = { value: 100 * fontScale, unit: 'px/rem' }
+  window.rootSize = {
+    value: 100 * fontScale,
+    unit: 'px/rem',
+  }
+  window.rootSize.rem2px = function (d) {
+    var val = parseFloat(d) * this.value
+    if (typeof d === 'string' && d.match(/rem$/)) {
+      val += 'px'
+    }
+    return val
+  }
+  window.rootSize.px2rem = function (d) {
+    var val = parseFloat(d) / this.value
+    if (typeof d === 'string' && d.match(/px$/)) {
+      val += 'rem'
+    }
+    return val
+  }
 
   /* Set viewport */
   var initialScale = 1 / fontScale
   var content = cContent(initialScale, options)
-
   var meta = document.createElement('meta')
   meta.setAttribute('name', 'viewport')
   meta.setAttribute('content', content)
   document.head.appendChild(meta)
+
+  /* Set init style */
+  var style = document.createElement('style')
+  style.setAttribute('type', 'text/css')
+  style.innerText = initStyle
+  document.head.appendChild(style)
 }

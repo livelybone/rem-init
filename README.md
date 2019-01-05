@@ -8,6 +8,17 @@
 
 rem, pixel, viewport, for adapting various interfaces
 
+## Intro
+> `px` with `rem` conversion depends on the font-size of `html` tag, when the font-size of `html` is `625%`, `1rem` is equal to `100px`
+
+> If your website doesn't need to be compatible with ie8, you can use `rem` everywhere, include font-size
+
+> If your client is pc, the function will set `1rem` to be `100px`
+
+> If your client is mobile, the function will set `1rem` to be `(100 * (window.devicePixelRatio || 1))px`
+
+> For adapting various interfaces, you can use `vw` `vh` `vmin` `vmax`
+
 ## repository
 https://github.com/livelybone/rem-init.git
 
@@ -67,3 +78,13 @@ RemInit({maxFactor: 4}) // => viewport: width=device-width, initial-scale=0.5, m
 ## Extra
 
 > The function will add `isMobile` field to `window` if `isMobile` is not exist in `window`
+
+> The function will add `rootSize` field to `window`, you can use it to convert `rem` with `px`
+```js
+var rootSize = {
+  value: Number, // means: 1rem = [value]px
+  unit: 'px/rem',
+  rem2px: Function,
+  px2rem: Function,
+}
+```
