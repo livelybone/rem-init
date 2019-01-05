@@ -17,7 +17,7 @@ rem, pixel, viewport, for adapting various interfaces
 
 > If your client is mobile, the function will set `1rem` to be `(100 * (window.devicePixelRatio || 1))px`
 
-> For adapting various interfaces, you can use `vw` `vh` `vmin` `vmax`
+> For adapting various interfaces, you can use `vw` `vh` `vmin` `vmax` simultaneously
 
 ## repository
 https://github.com/livelybone/rem-init.git
