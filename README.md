@@ -1,7 +1,7 @@
 # @livelybone/rem-init
 [![NPM Version](http://img.shields.io/npm/v/@livelybone/rem-init.svg?style=flat-square)](https://www.npmjs.com/package/@livelybone/rem-init)
 [![Download Month](http://img.shields.io/npm/dm/@livelybone/rem-init.svg?style=flat-square)](https://www.npmjs.com/package/@livelybone/rem-init)
-![gzip with dependencies: .6kb](https://img.shields.io/badge/gzip--with--dependencies-.6kb-brightgreen.svg "gzip with dependencies: .6kb")
+![gzip with dependencies: .8kb](https://img.shields.io/badge/gzip--with--dependencies-.8kb-brightgreen.svg "gzip with dependencies: .8kb")
 ![pkg.module](https://img.shields.io/badge/pkg.module-supported-blue.svg "pkg.module")
 
 > `pkg.module supported`, which means that you can apply tree-shaking in you project
@@ -11,7 +11,9 @@ rem, pixel, viewport, for adapting various interfaces
 ## Intro
 > `px` with `rem` conversion depends on the font-size of `html` tag, when the font-size of `html` is `625%`, `1rem` is equal to `100px`
 
-> If your website doesn't need to be compatible with ie8, you can use `rem` everywhere, include font-size
+> You can use `rem` everywhere, include font-size.
+ 
+> This solution isn't compatible with ie8 
 
 > If your client is pc, the function will set `1rem` to be `100px`
 
