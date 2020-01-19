@@ -18,7 +18,7 @@ function cContent(initialScale, options) {
 }
 
 function getViewportMeta() {
-  const arr = Array.prototype.filter.call(document.getElementsByTagName('meta'), function (meta) {
+  var arr = Array.prototype.filter.call(document.getElementsByTagName('meta'), function (meta) {
     return meta.getAttribute('name') === 'viewport'
   })
   return arr[arr.length - 1]
