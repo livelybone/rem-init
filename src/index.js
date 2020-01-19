@@ -17,6 +17,13 @@ function cContent(initialScale, options) {
   return s + ', maximum-scale=' + max * initialScale
 }
 
+function getViewportMeta() {
+  const arr = Array.prototype.filter.call(document.getElementsByTagName('meta'), function (meta) {
+    return meta.getAttribute('name') === 'viewport'
+  })
+  return arr[arr.length - 1]
+}
+
 /**
  * @param {Object<{ pageNoScale: Boolean, pageScalable: Boolean, pageScaleMiddleware: Function, pageScaleMaxFactor: Number }>} options
  * @desc set viewport, and font-size of html tag, in order to adapting the interfaces in various device by using `rem`
@@ -61,14 +68,22 @@ export default function RemInit(options) {
   var middleware = options.pageScaleMiddleware
   if (pageNoScale || !middleware) content = cContent(1 / fontScale, options)
   else content = cContent(middleware(fontScale, isMobile), options)
-  var meta = document.createElement('meta')
-  meta.setAttribute('name', 'viewport')
+  var meta = getViewportMeta()
+  if (!meta) {
+    meta = document.createElement('meta')
+    meta.setAttribute('name', 'viewport')
+    document.head.appendChild(meta)
+  }
   meta.setAttribute('content', content)
-  document.head.appendChild(meta)
 
   /* Set init style */
-  var style = document.createElement('style')
-  style.setAttribute('type', 'text/css')
+  var id = 'rem-init-injected-style'
+  var style = document.getElementById(id)
+  if (!style) {
+    style = document.createElement('style')
+    style.setAttribute('id', id)
+    style.setAttribute('type', 'text/css')
+    document.head.appendChild(style)
+  }
   style.innerText = initStyle
-  document.head.appendChild(style)
 }
