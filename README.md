@@ -57,7 +57,7 @@ Use in html, see what your can use in [CDN: unpkg](https://unpkg.com/@livelybone
 
 > `pageScaleMiddleware`: `(fontScale: Number, isMobile: Boolean) => pageScale` You can rewrite the pageScale value which is default to be `1 / fontScale` on your own will by this function. It only works when `pageNoScale` is not equal to `true`
 
-> `pageScaleMaxFactor`: It only works when `pageScalable` is equal to `true`. The function will set the `maximum-scale` value to `Math.max(1, +options.pageScaleMaxFactor || 0) * initialScale`
+> `pageScaleMaxFactor`: It only works when `pageScalable` is equal to `true`. When pageScaleMaxFactor == false, the tool will remove the `maximum-scale` field of viewport, otherwise, the function will set the `maximum-scale` value to `Math.max(1, +options.pageScaleMaxFactor || 0) * initialScale`
 
 ### Example
 ```js

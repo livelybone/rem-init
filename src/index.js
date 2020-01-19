@@ -11,6 +11,8 @@ function cContent(initialScale, options) {
     return s + ', maximum-scale=' + initialScale + ', user-scalable=no'
   }
 
+  if (!options.pageScaleMaxFactor) return s
+
   var max = Math.max(+options.pageScaleMaxFactor || 0, 1)
   return s + ', maximum-scale=' + max * initialScale
 }

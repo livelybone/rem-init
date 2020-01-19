@@ -22,7 +22,8 @@ export interface RemInitOptions {
   /**
    * @desc  It only works when `pageScalable` is equal to `true`.
    *
-   *        The function will set the `maximum-scale` value to `Math.max(1, options.pageScaleMaxFactor || 0) * initialScale`
+   *        When pageScaleMaxFactor == false, the tool will remove the `maximum-scale` field of viewport
+   *        otherwise, the function will set the `maximum-scale` value to `Math.max(1, options.pageScaleMaxFactor || 0) * initialScale`
    *
    * Default: 1
    * */
