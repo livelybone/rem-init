@@ -49,7 +49,7 @@ Use in html, see what your can use in [CDN: unpkg](https://unpkg.com/@livelybone
 ## Params
 | Name              | Type                                                                                                                              | DefaultValue                                                                                                 | Description  |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------ |
-| `options`         | `Object<{ pageNoScale: Boolean, pageScalable: Boolean, pageScaleMiddleware: Function, pageScaleMaxFactor: Number|Boolean }>`  | `{ pageNoScale: false, pageScalable: false, pageScaleMiddleware: null, pageScaleMaxFactor: false }`      |  |
+| `options`         | `Object<{ pageNoScale: Boolean, pageScalable: Boolean, pageScaleMiddleware: Function, pageScaleMaxFactor: Number }>`  | `{ pageNoScale: false, pageScalable: false, pageScaleMiddleware: null, pageScaleMaxFactor: 1 }`      |  |
 
 > `pageNoScale`: When it is equal to `true`, the tool will force to set the `initial-scale` value of viewport to 1
 
@@ -57,7 +57,7 @@ Use in html, see what your can use in [CDN: unpkg](https://unpkg.com/@livelybone
 
 > `pageScaleMiddleware`: `(fontScale: Number, isMobile: Boolean) => pageScale` You can rewrite the pageScale value which is default to be `1 / fontScale` on your own will by this function. It only works when `pageNoScale` is not equal to `true`
 
-> `pageScaleMaxFactor`: It only works when `scalable` is equal to `true`. When it is equal to `true`, the tool will remove the `maximum-scale` field of viewport, otherwise, the function will set the `maximum-scale` value to `Math.max(1, options.pageScaleMaxFactor || 0) * initialScale`
+> `pageScaleMaxFactor`: It only works when `pageScalable` is equal to `true`. The function will set the `maximum-scale` value to `Math.max(1, +options.pageScaleMaxFactor || 0) * initialScale`
 
 ### Example
 ```js

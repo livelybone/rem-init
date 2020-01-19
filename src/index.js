@@ -2,7 +2,7 @@ var initStyle = '*{max-height: 1000000rem} body{-webkit-font-smoothing: antialia
 
 /**
  * @param {Number} initialScale
- * @param {Object<{ pageScalable: Boolean, pageScaleMaxFactor: Number|Boolean }>} options
+ * @param {Object<{ pageScalable: Boolean, pageScaleMaxFactor: Number }>} options
  * */
 function cContent(initialScale, options) {
   var s = 'width=device-width, initial-scale=' + initialScale
@@ -11,14 +11,12 @@ function cContent(initialScale, options) {
     return s + ', maximum-scale=' + initialScale + ', user-scalable=no'
   }
 
-  if (options.pageScaleMaxFactor === true) return s
-
-  var max = Math.max(options.pageScaleMaxFactor || 0, 1)
+  var max = Math.max(+options.pageScaleMaxFactor || 0, 1)
   return s + ', maximum-scale=' + max * initialScale
 }
 
 /**
- * @param {Object<{ pageNoScale: Boolean, pageScalable: Boolean, pageScaleMiddleware: Function, pageScaleMaxFactor: Number|Boolean }>} options
+ * @param {Object<{ pageNoScale: Boolean, pageScalable: Boolean, pageScaleMiddleware: Function, pageScaleMaxFactor: Number }>} options
  * @desc set viewport, and font-size of html tag, in order to adapting the interfaces in various device by using `rem`
  * */
 export default function RemInit(options) {

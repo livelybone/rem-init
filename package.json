@@ -1,10 +1,11 @@
 {
   "name": "@livelybone/rem-init",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "description": "rem, pixel, viewport, for adapting various interfaces",
   "main": "./lib/umd/index.js",
   "module": "./lib/es/index.js",
   "unpkg": "./lib/umd/index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "build": "rimraf ./lib && cross-env NODE_ENV=production rollup -c",
     "eslint": "eslint ./src",
