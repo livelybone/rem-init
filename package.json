@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/livelybone/rem-init#readme",
   "devDependencies": {
+    "cross-env": "^6.0.3",
     "eslint": "^5.3.0",
     "mocha": "^5.2.0",
     "rollup": "^0.65.0",
