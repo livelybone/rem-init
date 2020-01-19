@@ -18,7 +18,7 @@ export interface RemInitOptions {
    *
    * Default: fontScale => 1 / fontScale
    * */
-  pageScaleMiddleware?(fontScale: Number, isMobile: Boolean): number
+  pageScaleMiddleware?(fontScale: number, isMobile: boolean): number
   /**
    * @desc  It only works when `pageScalable` is equal to `true`.
    *
